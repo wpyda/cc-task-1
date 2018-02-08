@@ -15,19 +15,16 @@
             justify-content: center;
         }
 
-        /* TODO: Fix borders! */
-
         .row {
             background: #EEEEEE;
-            border: 1px solid #999999;
-            border-radius: 5px;
             width: 32vw;
             padding: 5px;
-            /*-webkit-box-shadow: 2px 2px 2px 0 rgba(153, 153, 153, 1);*/
-            /*-moz-box-shadow: 2px 2px 2px 0 rgba(153, 153, 153, 1);*/
-            /*box-shadow: 2px 2px 2px 0 rgba(153, 153, 153, 1);*/
             display: flex;
             justify-content: space-between;
+
+            /* TODO FIX BOX-SHADOW
+
+            /*box-shadow: 2px 2px 2px 0 rgba(153, 153, 153, 1);*/
         }
 
         ul {
@@ -42,66 +39,95 @@
             justify-content: center;
         }
 
+        ul li:nth-child(2n+1),
+        ul li:nth-child(2n) {
+            border: 1px solid #999999;
+            border-radius: 5px;
+        }
+
+        ul li:first-child,
+        ul li:last-child {
+            border: 1px solid #999999;
+        }
+
+
         ul li:nth-child(2n+1) {
             position: relative;
             right: 3%;
+            border-bottom-right-radius: 0;
+            border-top-right-radius: 0;
+            margin: -1px 0;
         }
 
-        ul li:nth-child(2n+1) .left {
-            color: #666666;
+        ul li:first-child { border-top-right-radius: 5px; }
+
+        ul li:nth-child(2n) {
+            border-bottom-left-radius: 0;
+            border-top-left-radius: 0;
         }
 
-        ul li:nth-child(2n) .right {
-            color: #666666;
-        }
+        ul li:last-child { border-bottom-left-radius: 5px; }
+
+        ul li:nth-child(2n+1) .left { color: #666666; }
+
+        ul li:nth-child(2n) .right { color: #666666; }
 
         .right {
             font-weight: 700;
-            white-space:nowrap;
+            white-space: nowrap;
         }
 
         .left {
-            overflow:hidden;
-            white-space:nowrap;
+            overflow: hidden;
+            white-space: nowrap;
             text-overflow: ellipsis;
         }
 
         @media (max-width: 900px) {
-            .row {
-                width: 45vw;
-            }
+            .row { width: 46vw; }
+            ul li:nth-child(2n+1) { right: 7%; }
+        }
+
+        @media (max-width: 600px) {
+            .row { width: 42vw; }
+            ul li:nth-child(2n+1) { right: 10%; }
+        }
+
+        @media (max-width: 250px) {
+            .row {width: 65vw;}
+            ul li:nth-child(2n+1) { right: 20%; }
         }
 
     </style>
 </head>
 <body>
 
-    <ul>
-        <li class="row">
-            <span class="left">Short text</span>
-            <span class="right">is short</span>
-        </li>
-        <li class="row">
-            <span class="left">A little bit longer text</span>
-            <span class="right">is longer</span>
-        </li>
-        <li class="row">
-            <span class="left">Also little bit longer</span>
-            <span class="right">Yes it is</span>
-        </li>
-        <li class="row">
-            <span class="left">A long text is here, totally for no reason</span>
-            <span class="right">Is long.</span>
-        </li>
-        <li class="row">
-            <span class="left">A long text is here also, for the same reason</span>
-            <span class="right">Is long too!</span>
-        </li>
-        <li class="row">
-            <span class="left">OK</span>
-            <span class="right">OK</span>
-        </li>
-    </ul>
+<ul>
+    <li class="row">
+        <span class="left">Short text</span>
+        <span class="right">is short</span>
+    </li>
+    <li class="row">
+        <span class="left">A little bit longer text</span>
+        <span class="right">is longer</span>
+    </li>
+    <li class="row">
+        <span class="left">Also little bit longer</span>
+        <span class="right">Yes it is</span>
+    </li>
+    <li class="row">
+        <span class="left">A long text is here, totally for no reason</span>
+        <span class="right">Is long.</span>
+    </li>
+    <li class="row">
+        <span class="left">A long text is here also, for the same reason</span>
+        <span class="right">Is long too!</span>
+    </li>
+    <li class="row">
+        <span class="left">OK</span>
+        <span class="right">OK</span>
+    </li>
+</ul>
 
 </body>
 </html>
