@@ -35,34 +35,30 @@ const generateRunicWords = length => {
         {name: 'Zod', power: 19},
     ]
     const words = []
-    // const singleWord = {
-    //     word: "Test",
-    //     power: 20
-    // }
-
-    // Reduce zwracające power i name najsilniejszej runy
-    // const power = runes.reduce((max, rune, index) => rune.power > max ? rune.power : max, runes[0].power)
-    // const runeName = runes.reduce((max, rune, index) => rune.power > max ? rune.name : max, runes[0].power)
+    const newRunes = runes.map(el => el)
 
     const maxPowerRune = () => {
-        const rune = runes.reduce((max, rune) => (rune.power > max.power) ? rune : max)
-
-
-
-        console.log(rune.power)
+        const rune = newRunes.reduce((max, rune) => (rune.power > max.power) ? rune : max)
         words.push({name: rune.name, power: rune.power})
+
+        const removeRune = (array, element) => {
+            const index = array.indexOf(element)
+
+            if (index !== -1) {
+                array.splice(index, 1)
+            }
+        }
+        removeRune(newRunes, rune)
+
     }
 
-    // console.log('maxPowerRune', maxPowerRune())
-
-    for (let i = 0; i < length; i++) {
+    for (let i = 0; i < 10; i++) {
         maxPowerRune()
     }
 
-    // words.push(singleWord)
     console.log('words', words)
 
     // return runicWords
 }
 
-generateRunicWords(5)
+generateRunicWords()
