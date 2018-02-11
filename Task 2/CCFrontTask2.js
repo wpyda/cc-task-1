@@ -61,7 +61,9 @@ const generateRunicWords = (length) => {
         const power = slice.reduce((runicWords, {power}) => runicWords + power, 0)
 
         runicWords.push({name, power})
+
+        if (runicWords.length === 10) {break}
     }
     return runicWords
 }
-console.log(generateRunicWords(5))
+console.log(generateRunicWords(4))
