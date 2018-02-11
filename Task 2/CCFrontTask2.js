@@ -33,9 +33,11 @@ const runes = [
     {name: "Cham", power: 29},
     {name: "Zod", power: 19},
 ]
-const words = []
+
 
 const generateRunicWords = (length) => {
+
+    const words = []
 
     const newRunes = runes.map(el => el)
     const removeRune = (array, element) => {
@@ -45,25 +47,25 @@ const generateRunicWords = (length) => {
         }
     }
 
-    // zwracam tablice wszystkich wartosci run w kolejnosci od najmocniejszej
     for (let i = 0; i < runes.length; i++) {
         const rune = newRunes.reduce((max, rune) => (rune.power > max.power) ? rune : max)
         words.push({name: rune.name, power: rune.power})
         removeRune(newRunes, rune)
     }
-    console.log("words", words)
 
-    // tworze nowa tablice z zsumowanymi name i power
     const runicWords = []
     for (let i = 0; i < words.length; i += length) {
         const slice = words.slice(i, i + length)
-        const name = slice.map(({name}) => name).join('-')
-        const power = slice.reduce((runicWords, {power}) => runicWords + power, 0)
 
-        runicWords.push({name, power})
+        if (slice.length === length) {
+            const name = slice.map(({name}) => name).join('-')
+            const power = slice.reduce((runicWords, {power}) => runicWords + power, 0)
+
+            runicWords.push({name, power})
+        }
 
         if (runicWords.length === 10) {break}
     }
     return runicWords
 }
-console.log(generateRunicWords(4))
+// console.log(generateRunicWords(2))
