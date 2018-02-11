@@ -54,7 +54,6 @@ const generateRunicWords = (length) => {
     console.log("words", words)
 
     // tworze nowa tablice z zsumowanymi name i power
-
     const runicWords = []
     for (let i = 0; i < words.length; i += length) {
         const slice = words.slice(i, i + length)
