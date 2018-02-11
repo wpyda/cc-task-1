@@ -34,38 +34,44 @@ const runes = [
     {name: "Zod", power: 19},
 ]
 
-
 const generateRunicWords = (length) => {
 
-    const words = []
+    if (typeof length === "number") {
 
-    const newRunes = runes.map(el => el)
-    const removeRune = (array, element) => {
-        const index = array.indexOf(element)
-        if (index !== -1) {
-            array.splice(index, 1)
-        }
-    }
+        const words = []
 
-    for (let i = 0; i < runes.length; i++) {
-        const rune = newRunes.reduce((max, rune) => (rune.power > max.power) ? rune : max)
-        words.push({name: rune.name, power: rune.power})
-        removeRune(newRunes, rune)
-    }
-
-    const runicWords = []
-    for (let i = 0; i < words.length; i += length) {
-        const slice = words.slice(i, i + length)
-
-        if (slice.length === length) {
-            const name = slice.map(({name}) => name).join('-')
-            const power = slice.reduce((runicWords, {power}) => runicWords + power, 0)
-
-            runicWords.push({name, power})
+        const newRunes = runes.map(el => el)
+        const removeRune = (array, element) => {
+            const index = array.indexOf(element)
+            if (index !== -1) {
+                array.splice(index, 1)
+            }
         }
 
-        if (runicWords.length === 10) {break}
+        for (let i = 0; i < runes.length; i++) {
+            const rune = newRunes.reduce((max, rune) => (rune.power > max.power) ? rune : max)
+            words.push({name: rune.name, power: rune.power})
+            removeRune(newRunes, rune)
+        }
+
+        const runicWords = []
+        for (let i = 0; i < words.length; i += length) {
+            const slice = words.slice(i, i + length)
+
+            if (slice.length === length) {
+                const name = slice.map(({name}) => name).join('-')
+                const power = slice.reduce((runicWords, {power}) => runicWords + power, 0)
+
+                runicWords.push({name, power})
+            }
+
+            if (runicWords.length === 10) {
+                break
+            }
+        }
+        return runicWords
+    } else {
+        return "Input should be a number!"
     }
-    return runicWords
 }
 // console.log(generateRunicWords(2))
