@@ -35,11 +35,9 @@ const runes = [
 ]
 const words = []
 
-const generateRunicWords = (array, length) => {
-
+const generateRunicWords = (length) => {
 
     const newRunes = runes.map(el => el)
-
     const removeRune = (array, element) => {
         const index = array.indexOf(element)
         if (index !== -1) {
@@ -55,81 +53,16 @@ const generateRunicWords = (array, length) => {
     }
     console.log("words", words)
 
-    // licze power
-
-    const allPowers = []
-
-    for (let i = 0; i < runes.length; i++) {
-        allPowers.push(words[i].power)
-    }
-    console.log("allPowers", allPowers)
-
-
-    const newPowers = []
-
-    for (let i = 0; i < length; i++) {
-        newPowers.push(allPowers[i])
-    }
-    console.log("newPowers", newPowers)
-
-
-    // @TODO sum up energy
+    // tworze nowa tablice z zsumowanymi name i power
 
     const runicWords = []
-    for (let i = 0; i < array.length; i += length) {
-        const name = array
-            .slice(i, i + length)
-            .map(({name}) => name)
-            .join('-')
+    for (let i = 0; i < words.length; i += length) {
+        const slice = words.slice(i, i + length)
+        const name = slice.map(({name}) => name).join('-')
+        const power = slice.reduce((runicWords, {power}) => runicWords + power, 0)
 
-        runicWords.push({name, power: newPowers.reduce((total, num) => total + num, 0)})
+        runicWords.push({name, power})
     }
     return runicWords
-
 }
-console.log(generateRunicWords(words, 3))
-
-
-//-------------------------OLD CODE-------------------------
-//
-//
-// const runicWords = []
-// const newWords1 = words.map(el => el)
-// // tworzy nowe tablice z nazwami i mocami run (wszystkie)
-//
-// const allWords = []
-// const allPowers = []
-//
-// for (let i = 0; i < runes.length; i++) {
-//     allWords.push(words[i].name)
-//     allPowers.push(words[i].power)
-// }
-// console.log("allWords", allWords)
-// console.log("allPowers", allPowers)
-//
-// // tworzy nowe tablice z nazwami i mocami (tyle ile length)
-//
-// const newWords = []
-// const newPowers = []
-//
-// for (let i = 0; i < length; i++) {
-//     newWords.push(allWords[i])
-//     newPowers.push(allPowers[i])
-// }
-// console.log("newWords", newWords)
-// console.log("newPowers", newPowers)
-//
-// for (let i = 0; i < 10; i++) {
-//
-//     // tworzy nowa tablice zawierajaca zsumowane nazwy i moce run
-//     let newArr = {
-//         name: newWords.join("-"),
-//         power: newPowers.reduce((total, num) => total + num, 0)
-//     }
-//
-//     // console.log("newArr", newArr)
-//     runicWords[i] = (newArr)
-//     removeRune(allWords, newWords[i])
-// }
-//
-// console.log("runicWords", runicWords)
+console.log(generateRunicWords(5))
