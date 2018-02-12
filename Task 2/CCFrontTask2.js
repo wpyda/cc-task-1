@@ -34,7 +34,7 @@ const runes = [
     {name: "Zod", power: 19},
 ]
 
-const generateRunicWords = length => {
+exports.generateRunicWords = length => {
 
     if (typeof length !== "number") return Error("Input should be a number!")
     if (length === 0) return Error("Input should be greater than 0!")
@@ -76,26 +76,26 @@ const generateRunicWords = length => {
     return runicWords
 }
 //------TEST OUTPUT
-console.log('generateRunicWords: ', generateRunicWords(5))
+// console.log('generateRunicWords: ', generateRunicWords(5))
 
 
-const checkRunicWord = runicWord => {
+exports.checkRunicWord = runicWord => {
     if (typeof runicWord !== 'string') return Error("Input is not a string!")
     if (runicWord === '') return Error("Input cannot be empty!")
 
     // "Copying" runes array to inputRunes, splitting input string and checking if inputRunes array contain single input items-runes (after split)
     let inputRunes = [].concat(runes)
-    let output = 0
+    let runicWordObject = 0
     const runicWordArr = runicWord.split('-')
     for (let i = 0; i < runicWordArr.length; i++) {
         for (let j = 0; j < inputRunes.length; j++) {
             if (runicWordArr[i] === inputRunes[j].name) {
-                output += inputRunes[j].power
+                runicWordObject += inputRunes[j].power
             }
         }
     }
-    return output
+    return runicWordObject
 }
 
 //------TEST OUTPUT
-console.log('checkRunicWord: ', checkRunicWord('Ohm-Lo-Ber-Ist'))
+// console.log('checkRunicWord: ', checkRunicWord('Ohm-Lo-Ber-Ist'))
