@@ -36,8 +36,8 @@ const runes = [
 
 const generateRunicWords = length => {
 
-    if (typeof length !== "number") return "Input should be a number!"
-    if (length === 0) return "Input should be greater than 0!"
+    if (typeof length !== "number") return Error("Input should be a number!")
+    if (length === 0) return Error("Input should be greater than 0!")
 
     const words = []
     const newRunes = runes.map(el => el)
@@ -80,7 +80,8 @@ console.log('generateRunicWords: ', generateRunicWords(5))
 
 
 const checkRunicWord = runicWord => {
-    if (typeof runicWord !== 'string') return Error('Input is not a string!')
+    if (typeof runicWord !== 'string') return Error("Input is not a string!")
+    if (runicWord === '') return Error("Input cannot be empty!")
 
     // "Copying" runes array to inputRunes, splitting input string and checking if inputRunes array contain single input items-runes (after split)
     let inputRunes = [].concat(runes)
