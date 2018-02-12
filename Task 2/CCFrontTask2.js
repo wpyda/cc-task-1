@@ -64,10 +64,10 @@ exports.generateRunicWords = length => {
         const slice = words.slice(i, i + length)
 
         if (slice.length === length) {
-            const runeWord = slice.map(({name}) => name).join('-')
+            const name = slice.map(({name}) => name).join('-')
             const power = slice.reduce((runicWords, {power}) => runicWords + power, 0)
 
-            runicWords.push({runeWord, power})
+            runicWords.push({name, power})
         }
 
         if (runicWords.length === 10) {
