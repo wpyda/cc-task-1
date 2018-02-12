@@ -1,87 +1,85 @@
 const runes = [
-    {name: "El", power: 28, dont: "Ort"},
-    {name: "Eld", power: 33, dont: "Sur"},
-    {name: "Tir", power: 9, dont: "Eth"},
-    {name: "Nef", power: 7, dont: "Ist"},
-    {name: "Eth", power: 31, dont: "Tir"},
-    {name: "Ith", power: 22, dont: "Pul"},
-    {name: "Tal", power: 8, dont: "Io"},
-    {name: "Ral", power: 25, dont: "Um"},
-    {name: "Ort", power: 18, dont: "El"},
-    {name: "Thul", power: 13, dont: "Sol"},
-    {name: "Amn", power: 6, dont: "Fal"},
-    {name: "Sol", power: 10, dont: "Thul"},
-    {name: "Shael", power: 17, dont: "Lem"},
-    {name: "Dol", power: 11, dont: "Hel"},
-    {name: "Hel", power: 12, dont: "Dol"},
-    {name: "Io", power: 20, dont: "Tal"},
-    {name: "Lum", power: 32, dont: "Gul"},
-    {name: "Ko", power: 27, dont: "Mal"},
-    {name: "Fal", power: 14, dont: "Amn"},
-    {name: "Lem", power: 26, dont: "Shall"},
-    {name: "Pul", power: 15, dont: "Ith"},
-    {name: "Um", power: 16, dont: "Ral"},
-    {name: "Mal", power: 21, dont: "Ko"},
-    {name: "Ist", power: 4, dont: "Nef"},
-    {name: "Gul", power: 23, dont: "Lum"},
-    {name: "Vex", power: 24, dont: "Ohm"},
-    {name: "Ohm", power: 1, dont: "Vex"},
-    {name: "Lo", power: 2, dont: "Cham"},
-    {name: "Sur", power: 30, dont: "Eld"},
-    {name: "Ber", power: 3, dont: ""},
-    {name: "Jah", power: 5, dont: "Zod"},
-    {name: "Cham", power: 29, dont: "Lo"},
-    {name: "Zod", power: 19, dont: "Jah"},
+    {name: "El", power: 28, not: "Ort"},
+    {name: "Eld", power: 33, not: "Sur"},
+    {name: "Tir", power: 9, not: "Eth"},
+    {name: "Nef", power: 7, not: "Ist"},
+    {name: "Eth", power: 31, not: "Tir"},
+    {name: "Ith", power: 22, not: "Pul"},
+    {name: "Tal", power: 8, not: "Io"},
+    {name: "Ral", power: 25, not: "Um"},
+    {name: "Ort", power: 18, not: "El"},
+    {name: "Thul", power: 13, not: "Sol"},
+    {name: "Amn", power: 6, not: "Fal"},
+    {name: "Sol", power: 10, not: "Thul"},
+    {name: "Shael", power: 17, not: "Lem"},
+    {name: "Dol", power: 11, not: "Hel"},
+    {name: "Hel", power: 12, not: "Dol"},
+    {name: "Io", power: 20, not: "Tal"},
+    {name: "Lum", power: 32, not: "Gul"},
+    {name: "Ko", power: 27, not: "Mal"},
+    {name: "Fal", power: 14, not: "Amn"},
+    {name: "Lem", power: 26, not: "Shall"},
+    {name: "Pul", power: 15, not: "Ith"},
+    {name: "Um", power: 16, not: "Ral"},
+    {name: "Mal", power: 21, not: "Ko"},
+    {name: "Ist", power: 4, not: "Nef"},
+    {name: "Gul", power: 23, not: "Lum"},
+    {name: "Vex", power: 24, not: "Ohm"},
+    {name: "Ohm", power: 1, not: "Vex"},
+    {name: "Lo", power: 2, not: "Cham"},
+    {name: "Sur", power: 30, not: "Eld"},
+    {name: "Ber", power: 3, not: ""},
+    {name: "Jah", power: 5, not: "Zod"},
+    {name: "Cham", power: 29, not: "Lo"},
+    {name: "Zod", power: 19, not: "Jah"},
 ]
 
 const generateRunicWords = length => {
+
     if (typeof length !== "number") return Error("Input should be a number!")
     if (length === 0) return Error("Input should be greater than 0!")
-    if (length > runes.length) return Error("Number is too big! Not enough runes!")
+    if (length > runes.length) return Error("Input number is too big. Not enough runes!")
 
-    const findMostPowerfulRune = (inputRunes) => {
-        return inputRunes.reduce((reducer, el) => (
-            el.power > reducer.power ? el : reducer
-        ), {name: '', power: 0, dont: ''})
-    }
+    const words = []
+    const newRunes = runes.map(el => el)
+    const runicWords = []
 
-    const generateRunicWord = (runesArr) => {
-        const runicWord = {name: '', power: 0}
-        runesArr.forEach((el, i, arr) => {
-            runicWord.name += el.name
-            runicWord.power += el.power
-            if (i < arr.length - 1) {
-                runicWord.name += '-'
-            }
-        })
-        return runicWord
-    }
-
-    let inputRunes = [].concat(runes)
-    let runicWords = []
-    let maxPowerRune
-    let n = 0
-
-    // Generating runic words arrays 'length' times
-    do {
-        let runicWordArr = []
-        for (let i = 0; i < length; i++) {
-            maxPowerRune = findMostPowerfulRune(inputRunes)
-            inputRunes.splice(inputRunes.indexOf(maxPowerRune), 1)
-            runicWordArr[i] = maxPowerRune
+    // A function which removes item from array
+    const removeRune = (array, element) => {
+        const index = array.indexOf(element)
+        if (index !== -1) {
+            array.splice(index, 1)
         }
-        runicWords[n] = generateRunicWord(runicWordArr)
-        ++n
-    } while ((inputRunes.length > length) && (n < 10))
+    }
 
+    // Pushing new keys and values to an empty array (words), so it contains segregated runes (from the greatest)
+    for (let i = 0; i < runes.length; i++) {
+        const rune = newRunes.reduce((max, rune) => (rune.power > max.power) ? rune : max)
+        words.push({name: rune.name, power: rune.power})
+        removeRune(newRunes, rune)
+    }
+
+    // Slicing words array and pushing it's elements to new empty array - runicWords
+    for (let i = 0; i < words.length; i += length) {
+        const slice = words.slice(i, i + length)
+        console.log('slice', slice)
+        if (slice.length === length) {
+            const name = slice.map(({name}) => name).join('-')
+            const power = slice.reduce((runicWords, {power}) => runicWords + power, 0)
+
+            runicWords.push({name, power})
+        }
+
+        if (runicWords.length === 10) {
+            break
+        }
+    }
     return runicWords
 }
+//------TEST OUTPUT
+console.log('generateRunicWords: ', generateRunicWords(4))
 
-//---- TEST OUTPUT
-console.log('generateRunicWords: ', generateRunicWords(5))
 
-
-// A function which checks if typed runic word is valid
 const checkRunicWord = runicWord => {
     if (typeof runicWord !== 'string') return Error("Input is not a string!")
     if (runicWord === '') return Error("Input cannot be empty!")
