@@ -34,7 +34,7 @@ const runes = [
     {name: "Zod", power: 19, not: "Jah"},
 ]
 
-const generateRunicWords = length => {
+exports.generateRunicWords = length => {
 
     if (typeof length !== "number") return Error("Input should be a number!")
     if (length === 0) return Error("Input should be greater than 0!")
@@ -77,10 +77,10 @@ const generateRunicWords = length => {
     return runicWords
 }
 //------TEST OUTPUT
-console.log('generateRunicWords: ', generateRunicWords(4))
+// console.log('generateRunicWords: ', generateRunicWords(4))
 
 
-const checkRunicWord = runicWord => {
+exports.checkRunicWord = runicWord => {
     if (typeof runicWord !== 'string') return Error("Input is not a string!")
     if (runicWord === '') return Error("Input cannot be empty!")
 
@@ -99,4 +99,4 @@ const checkRunicWord = runicWord => {
 }
 
 //------TEST OUTPUT
-console.log('checkRunicWord: ', checkRunicWord('Ohm-Lo-Ber-Ist'))
+// console.log('checkRunicWord: ', checkRunicWord('Ohm-Lo-Ber-Ist'))
